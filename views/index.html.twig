@@ -2,9 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>BarberShop</title>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <div class = "container">
+      <h1>Ian's Barbershop</h1>
+      <a href="/"><button class="btn btn-primary">Home</button></a>
+      <a href="/add_barber"><button class="btn btn-success">Add Barber</button></a>
+      <a href="/remove_barbers"><button class="btn btn-danger">Remove All Barbers</button></a>
+      {% if barbers is not empty %}
+        <h3>Barbers:</h3>
+        <ul>
+          {% for barber in barbers %}
+            <li><h4><a href="/{{barber.getId}}/clients">{{ barber.getName }}</a>
+              <a href="/{{barber.getId}}/edit"><button class="btn btn-info btn-xs">Edit</button></a>
+              <a href="/{{barber.getId}}/delete"><button class="btn btn-danger btn-xs">Delete</button></a>
+            </h4></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
   </body>
 </html>

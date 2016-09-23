@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>BarberShop</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Update {{barber.getName}}'s info</h1>
+
+      <form action="/{{barber.getId}}" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <div class="form-group">
+          <label for="new_barber_name">Update {{barber.getName}}'s Name:</label>
+          <input class="form-control" id="new_barber_name" name="new_barber_name" type="text" placeholder={{barber.getName}} required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </body>
+</html>

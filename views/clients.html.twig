@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>BarberShop</title>
+  </head>
+  <body>
+    <div class = "container">
+      <h1>{{barber.getName}}'s Clients</h1>
+      <a href="/"><button class="btn btn-primary">Home</button></a>
+      <a href="/{{barber.getId}}/clients/add_client"><button class="btn btn-success">Add Client</button></a>
+      <a href="/{{barber.getId}}/clients/remove_clients"><button class="btn btn-danger">Remove All Clients</button></a>
+      {% if clients is not empty %}
+        <h3>Clients:</h3>
+        <ul>
+          {% for client in clients %}
+            {% if client.getBarberId == barber.getId %}
+              <li><h4>{{ client.getName }}
+                <a href="/{{barber.getId}}/clients/{{client.getId}}/edit"><button class="btn btn-info btn-xs">Edit</button></a>
+                <a href="/{{barber.getId}}/clients/{{client.getId}}/delete"><button class="btn btn-danger btn-xs">Delete</button></a>
+              </h4></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>

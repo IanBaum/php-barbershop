@@ -41,6 +41,7 @@
                 $new_barber = new Barber($name, $id);
                 array_push($barbers, $new_barber);
             }
+            sort($barbers);
             return $barbers;
         }
 
@@ -66,6 +67,11 @@
         {
             $GLOBALS['DB']->exec("UPDATE barbers SET name = '{$new_name}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM barbers WHERE id = {$this->getId()};");
         }
 
         function getClients()

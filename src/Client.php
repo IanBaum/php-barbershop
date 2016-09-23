@@ -53,6 +53,7 @@
                 $new_client = new Client($name, $barber_id, $id);
                 array_push($clients, $new_client);
             }
+            sort($clients);
             return $clients;
         }
 
@@ -81,6 +82,11 @@
 
             $GLOBALS['DB']->exec("UPDATE clients SET barber_id = '{$new_barber_id}' WHERE id = {$this->getId()};");
             $this->setBarberId($new_barber_id);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
         }
     }
 
