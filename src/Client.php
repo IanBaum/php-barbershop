@@ -73,6 +73,15 @@
             }
             return $found_client;
         }
+
+        function update($new_name, $new_barber_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+
+            $GLOBALS['DB']->exec("UPDATE clients SET barber_id = '{$new_barber_id}' WHERE id = {$this->getId()};");
+            $this->setBarberId($new_barber_id);
+        }
     }
 
 ?>
