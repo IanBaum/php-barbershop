@@ -5,6 +5,7 @@
     */
 
     require_once "src/Barber.php";
+    require_once "src/Client.php";
 
     $server = 'mysql:host=localhost:8889;dbname=barbershop_test';
     $username = 'root';
@@ -71,9 +72,10 @@
         {
             //Arrange
             $name = "Bill";
-            $name2 = "John";
             $test_barber = new Barber($name);
             $test_barber->save();
+
+            $name2 = "John";
             $test_barber2 = new Barber($name2);
             $test_barber2->save();
 
@@ -88,9 +90,10 @@
         {
             //Arrange
             $name = "Bill";
-            $name2 = "John";
             $test_barber = new Barber($name);
             $test_barber->save();
+
+            $name2 = "John";
             $test_barber2 = new Barber($name2);
             $test_barber2->save();
 
@@ -106,9 +109,10 @@
         {
             //Arrange
             $name = "Bill";
-            $name2 = "John";
             $test_barber = new Barber($name);
             $test_barber->save();
+
+            $name2 = "John";
             $test_barber2 = new Barber($name2);
             $test_barber2->save();
 
@@ -133,6 +137,38 @@
             //Assert
             $result = $test_barber->getName();
             $this->assertEquals($new_name, $result);
+        }
+
+        function testGetClients()
+        {
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
+
+            $barber_name2 = "Frank";
+            $test_barber2 = new Barber($barber_name);
+            $test_barber2->save();
+            $barber_id2 = $test_barber2->getId();
+
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
+            $test_client->save();
+
+            $client_name2 = "Joe";
+            $test_client2 = new Client($client_name2, $barber_id);
+            $test_client2->save();
+
+            $client_name3 = "Mike";
+            $test_client3 = new Client($client_name3, $barber_id2);
+            $test_client3->save();
+
+            //Act
+            $result = $test_barber->getClients();
+
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
         }
     }
 ?>
