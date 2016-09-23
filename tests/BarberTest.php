@@ -101,5 +101,22 @@
             //Assert
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Bill";
+            $name2 = "John";
+            $test_barber = new Barber($name);
+            $test_barber->save();
+            $test_barber2 = new Barber($name2);
+            $test_barber2->save();
+
+            //Act
+            $result = Barber::find($test_barber->getId());
+
+            //Assert
+            $this->assertEquals($test_barber, $result);
+        }
     }
 ?>
