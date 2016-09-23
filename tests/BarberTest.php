@@ -13,6 +13,10 @@
 
     class BarberTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Barber::deleteAll();
+        }
         function test_getId()
         {
             //Arrange
@@ -47,6 +51,55 @@
             $result = $test_barber->getName();
             //Assert
             $this->assertEquals($new_name, $result);
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Bill";
+            $test_barber = new Barber($name);
+            $test_barber->save();
+
+            //Act
+            $result = Barber::getAll();
+
+            //Assert
+            $this->assertEquals($test_barber, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Bill";
+            $name2 = "John";
+            $test_barber = new Barber($name);
+            $test_barber->save();
+            $test_barber2 = new Barber($name2);
+            $test_barber2->save();
+
+            //Act
+            $result = Barber::getAll();
+
+            //Assert
+            $this->assertEquals([$test_barber, $test_barber2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "Bill";
+            $name2 = "John";
+            $test_barber = new Barber($name);
+            $test_barber->save();
+            $test_barber2 = new Barber($name2);
+            $test_barber2->save();
+
+            //Act
+            Barber::deleteAll();
+            $result = Barber::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
         }
     }
 ?>
