@@ -36,6 +36,20 @@
         {
             $this->barber_id = (int) $new_barber_id;
         }
+
+        function save(){
+
+        }
+
+        static function getAll()
+        {
+
+        }
+
+        static function deleteAll()
+        {
+          
+        }
     }
 
 ?>

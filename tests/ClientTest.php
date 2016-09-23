@@ -41,82 +41,147 @@
 
         function test_getName()
         {
-          //Arrange
-          $barber_name = "Bill";
-          $test_barber = new Barber($barber_name);
-          $test_barber->save();
-          $barber_id = $test_barber->getId();
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
 
-          $client_name = "Tim";
-          $test_client = new Client($client_name, $barber_id);
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
 
-          //Act
-          $result = $test_client->getName();
+            //Act
+            $result = $test_client->getName();
 
-          //Assert
-          $this->assertEquals($client_name, $result);
+            //Assert
+            $this->assertEquals($client_name, $result);
         }
 
         function test_setName()
         {
-          //Arrange
-          $barber_name = "Bill";
-          $test_barber = new Barber($barber_name);
-          $test_barber->save();
-          $barber_id = $test_barber->getId();
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
 
-          $client_name = "Tim";
-          $test_client = new Client($client_name, $barber_id);
-          $new_client_name = "Joe";
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
+            $new_client_name = "Joe";
 
-          //Act
-          $test_client->setName($new_client_name);
-          $result = $test_client->getName();
+            //Act
+            $test_client->setName($new_client_name);
+            $result = $test_client->getName();
 
-          //Assert
-          $this->assertEquals($new_client_name, $result);
+            //Assert
+            $this->assertEquals($new_client_name, $result);
         }
 
         function test_getBarberId()
         {
-          //Arrange
-          $barber_name = "Bill";
-          $test_barber = new Barber($barber_name);
-          $test_barber->save();
-          $barber_id = $test_barber->getId();
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
 
-          $client_name = "Tim";
-          $test_client = new Client($client_name, $barber_id);
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
 
-          //Act
-          $result = $test_client->getBarberId();
+            //Act
+            $result = $test_client->getBarberId();
 
-          //Assert
-          $this->assertEquals($barber_id, $result);
+            //Assert
+            $this->assertEquals($barber_id, $result);
         }
 
         function test_setBarberId()
         {
-          //Arrange
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
+
+            $barber_name2 = "Frank";
+            $test_barber2 = new Barber($barber_name2);
+            $test_barber->save();
+            $barber_id2 = $test_barber2->getId();
+
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
+
+            //Act
+            $test_client->setBarberId($barber_id2);
+            $result = $test_client->getBarberId();
+
+            //Assert
+            $this->assertEquals($barber_id2, $result);
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
+
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
+            $test_client->save();
+
+            //Act
+            $result = Client::getAll();
+
+            //Assert
+            $this->assertEquals($test_client, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
+
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
+            $test_client->save();
+
+            $client_name2 = "Joe";
+            $test_client2 = new Client($client_name2, $barber_id);
+            $test_client2->save();
+
+            //Act
+            $result = Client::getAll();
+
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
+
+        function test_deleteAll()
+        {
           $barber_name = "Bill";
           $test_barber = new Barber($barber_name);
           $test_barber->save();
           $barber_id = $test_barber->getId();
 
-          $barber_name2 = "Frank";
-          $test_barber2 = new Barber($barber_name2);
-          $test_barber->save();
-          $barber_id2 = $test_barber2->getId();
-
           $client_name = "Tim";
           $test_client = new Client($client_name, $barber_id);
+          $test_client->save();
+
+          $client_name2 = "Joe";
+          $test_client2 = new Client($client_name2, $barber_id);
+          $test_client2->save();
 
           //Act
-          $test_client->setBarberId($barber_id2);
-          $result = $test_client->getBarberId();
+          Client::deleteAll();
+          $result = Client::getAll();
 
           //Assert
-          $this->assertEquals($barber_id2, $result);
+          $this->assertEquals([], $result);
         }
     }
 ?>
