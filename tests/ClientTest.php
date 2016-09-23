@@ -14,10 +14,10 @@
 
     class ClientTest extends PHPUnit_Framework_TestCase
     {
-        protected function tearchown()
+        protected function teardown()
         {
           Barber::deleteAll();
-          Task::deleteAll();
+          Client::deleteAll();
         }
 
         function test_getId()
@@ -127,20 +127,42 @@
             $test_barber->save();
             $barber_id = $test_barber->getId();
 
-            $client_name = "Tim";
-            $test_client = new Client($client_name, $barber_id);
-            $test_client->save();
+            $client_name = "Carl";
+            $test_client3 = new Client($client_name, $barber_id);
+            $test_client3->save();
 
             //Act
             $result = Client::getAll();
 
             //Assert
-            $this->assertEquals($test_client, $result[0]);
+            $this->assertEquals($test_client3, $result[0]);
         }
+
 
         function test_getAll()
         {
             //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
+
+            $client_name = "Tim";
+            $client_name2 = "Joe";
+            $test_client = new Client($client_name, $barber_id);
+            $test_client->save();
+            $test_client2 = new Client($client_name2, $barber_id);
+            $test_client2->save();
+
+            //Act
+            $result = Client::getAll();
+
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
+
+        function test_deleteAll()
+        {
             $barber_name = "Bill";
             $test_barber = new Barber($barber_name);
             $test_barber->save();
@@ -155,33 +177,11 @@
             $test_client2->save();
 
             //Act
+            Client::deleteAll();
             $result = Client::getAll();
 
             //Assert
-            $this->assertEquals([$test_client, $test_client2], $result);
-        }
-
-        function test_deleteAll()
-        {
-          $barber_name = "Bill";
-          $test_barber = new Barber($barber_name);
-          $test_barber->save();
-          $barber_id = $test_barber->getId();
-
-          $client_name = "Tim";
-          $test_client = new Client($client_name, $barber_id);
-          $test_client->save();
-
-          $client_name2 = "Joe";
-          $test_client2 = new Client($client_name2, $barber_id);
-          $test_client2->save();
-
-          //Act
-          Client::deleteAll();
-          $result = Client::getAll();
-
-          //Assert
-          $this->assertEquals([], $result);
+            $this->assertEquals([], $result);
         }
     }
 ?>
