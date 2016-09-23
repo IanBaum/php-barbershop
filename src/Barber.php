@@ -51,7 +51,15 @@
 
         static function find($search_id)
         {
-          
+          $found_barber = null;
+          $barbers = Barber::getAll();
+          foreach($barbers as $barber){
+              $barber_id = $barber->getId();
+              if($barber_id == $search_id){
+                $found_barber = $barber;
+              }
+          }
+          return $found_barber;
         }
     }
 ?>
