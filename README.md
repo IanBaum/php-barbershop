@@ -43,7 +43,15 @@
 
 ## MySQL commands run:
 
-*
+* CREATE DATABASE barbershop;
+
+* USE barbershop;
+
+* CREATE TABLE barbers (id serial PRIMARY KEY, name varchar (255));
+
+* CREATE TABLE clients (id serial PRIMARY KEY, name varchar (255), barber_id int);
+
+* (copied barbershop to barbershop_test)
 
 ## Support and Contact Details
 
