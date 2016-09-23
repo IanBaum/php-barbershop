@@ -37,7 +37,7 @@
 * Example Inputs: name:Frank -> Phil, barber: Bill
 * Example Output: - Bill: -"Phil" at 2pm Wednesday
 
-* _The user can delete barbers from the webpage._
+* _The user can delete customers from the webpage._
 * Example Inputs: x"Frank"
 * Example Output: - Bill
 
