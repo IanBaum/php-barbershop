@@ -118,5 +118,21 @@
             //Assert
             $this->assertEquals($test_barber, $result);
         }
+
+        function test_update()
+        {
+            //Arrange
+            $name="Bill";
+            $test_barber = new Barber($name);
+            $test_barber->save();
+            $new_name = "David";
+
+            //Act
+            $test_cuisine->update($new_name);
+
+            //Assert
+            $result = $test_barber->getName();
+            $this->assertEquals($new_name, $result);
+        }
     }
 ?>

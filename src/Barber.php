@@ -61,5 +61,10 @@
           }
           return $found_barber;
         }
+
+        function update()
+        {
+          
+        }
     }
 ?>
