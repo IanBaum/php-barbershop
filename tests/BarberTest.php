@@ -128,7 +128,7 @@
             $new_name = "David";
 
             //Act
-            $test_cuisine->update($new_name);
+            $test_barber->update($new_name);
 
             //Assert
             $result = $test_barber->getName();
