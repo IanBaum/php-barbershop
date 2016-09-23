@@ -12,17 +12,17 @@
 
       function getId()
       {
-
+          return $this->id;
       }
 
       function getName()
       {
-
+          return $this->name;
       }
 
-      function setName()
+      function setName($new_name)
       {
-
+          $this->name = (string) $new_name;
       }
     }
 ?>
