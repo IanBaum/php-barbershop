@@ -127,7 +127,7 @@
             $test_barber->save();
             $barber_id = $test_barber->getId();
 
-            $client_name = "Carl";
+            $client_name = "Tim";
             $test_client3 = new Client($client_name, $barber_id);
             $test_client3->save();
 
@@ -148,9 +148,10 @@
             $barber_id = $test_barber->getId();
 
             $client_name = "Tim";
-            $client_name2 = "Joe";
             $test_client = new Client($client_name, $barber_id);
             $test_client->save();
+
+            $client_name2 = "Joe";
             $test_client2 = new Client($client_name2, $barber_id);
             $test_client2->save();
 
@@ -182,6 +183,29 @@
 
             //Assert
             $this->assertEquals([], $result);
+        }
+
+        function test_find()
+        {
+            //Arrange
+            $barber_name = "Bill";
+            $test_barber = new Barber($barber_name);
+            $test_barber->save();
+            $barber_id = $test_barber->getId();
+
+            $client_name = "Tim";
+            $test_client = new Client($client_name, $barber_id);
+            $test_client->save();
+
+            $client_name2 = "Joe";
+            $test_client2 = new Client($client_name2, $barber_id);
+            $test_client2->save();
+
+            //Act
+            $result = Client::find($test_client->getId());
+
+            //Assert
+            $this->assertEquals($test_client, $result);
         }
     }
 ?>
