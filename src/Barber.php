@@ -27,17 +27,26 @@
 
       function save()
       {
-
+          $GLOBALS['DB']->exec("INSERT INTO barbers (name) VALUES ('{$this->getName()}')");
+          $this->id = $GLOBALS['DB']->lastInsertId();
       }
 
       static function getAll()
       {
-
+          $returned_barbers = $GLOBALS['DB']->query("SELECT * FROM barbers;");
+          $barbers = array();
+          foreach($returned_barbers as $barber){
+              $name = $barber['name'];
+              $id = $barber['id'];
+              $new_barber = new Barber($name, $id);
+              array_push($barbers, $new_barber);
+          }
+          return $barbers;
       }
 
       static function deleteAll()
       {
-        
+          $GLOBALS['DB']->exec("DELETE FROM barbers;");
       }
     }
 ?>
