@@ -159,7 +159,7 @@
             $result = Client::getAll();
 
             //Assert
-            $this->assertEquals([$test_client, $test_client2], $result);
+            $this->assertEquals([$test_client2, $test_client], $result);
         }
 
         function test_deleteAll()
